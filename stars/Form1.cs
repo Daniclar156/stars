@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace stars
 {
@@ -20,26 +21,28 @@ namespace stars
 
         private void button1_Click(object sender, EventArgs e)
         {
-            starfield(100);
+            StarField(100);
         }
 
-        public void starfield(int length)
+        public void StarField(int length)
         {
             Graphics formGraphics = this.CreateGraphics();
             Random randNum = new Random();
 
             int red, green, blue;
-            red = randNum.Next(1, 256);
-            green = randNum.Next(1, 256);
-            blue = randNum.Next(1, 256);
-            int x, y;
-            x = randNum.Next(1, this.Width);
-            y = randNum.Next(1, this.Width);
 
-            SolidBrush drawBrush = new SolidBrush(Color.FromArgb(red, green, blue, 0));
+            int x, y;
+
             for (int counter = 0; counter <= length; counter++)
             {
-               formGraphics.FillEllipse(drawBrush, x, y, 25, 25);
+                x = randNum.Next(1, this.Width);
+                y = randNum.Next(1, this.Height);
+                red = randNum.Next(1, 256);
+                green = randNum.Next(1, 256);
+                blue = randNum.Next(1, 256);
+                SolidBrush drawBrush = new SolidBrush(Color.FromArgb(red, green, blue, 0));
+                formGraphics.FillEllipse(drawBrush, x, y, 25, 25);
+                Thread.Sleep(100);
             }
         }
 
